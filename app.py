@@ -10,15 +10,18 @@ model = whisper.load_model("base")
 print("Model loaded!")
 
 def download_youtube(url):
-    """yt-dlp로 유튜브 다운로드"""
-    try:
-        output_path = tempfile.mktemp(suffix='.mp4')
-        cmd = [
-            'yt-dlp',
-            '-f', 'best[ext=mp4]',
-            '-o', output_path,
-            url
-        ]
+       """yt-dlp로 유튜브 다운로드"""
+       try:
+           output_path = tempfile.mktemp(suffix='.mp4')
+           cmd = [
+               'yt-dlp',
+               '-f', 'bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+               '--no-check-certificates',
+               '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+               '--extractor-args', 'youtube:player_client=android',
+               '-o', output_path,
+               url
+           ]
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
         if result.returncode != 0:
             raise Exception(f"다운로드 실패: {result.stderr[:200]}")
