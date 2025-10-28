@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+
+[build.nixpacksPlan]
+phases.setup.nixPkgs = ["python311", "ffmpeg"]
+
+[deploy]
+startCommand = "python app.py"
