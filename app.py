@@ -6,7 +6,7 @@ import os
 
 # Whisper 모델 로드
 print("Loading Whisper model...")
-model = whisper.load_model("base")
+model = whisper.load_model("tiny")
 print("Model loaded!")
 
 def download_youtube(url):
